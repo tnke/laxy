@@ -1,0 +1,109 @@
+/**
+* Laxy - Parallax Side Menu Plugin
+*
+* @version    0.2.0
+* @author     Timo Sundvik <timo.sundvik@gmail.com>
+* @copyright  Copyright 2015 Timo Sundvik
+* @license    MIT
+*/
+
+// =============================================
+// LAXY
+// =============================================
+
+// ---------------------------------------------
+// Variables
+
+$laxy-menu-width:              260px;
+$laxy-offset:                  $laxy-menu-width * 0.2;
+$laxy-c-background:            #393939;
+$laxy-c-text:                  #fff;
+$laxy-transition:              transform .3s ease;
+
+// ---------------------------------------------
+// Laxy Menu
+
+.laxy-menu {
+    display:block;
+    width:$laxy-menu-width;
+    height:100%;
+    position:fixed;
+    z-index:9998;
+    top:0;
+    bottom:0;
+    overflow-y:auto;
+    background-color:$laxy-c-background;
+    color:$laxy-c-text;
+
+    -webkit-transition: $laxy-transition;
+            transition: $laxy-transition;
+
+    left:-($laxy-menu-width);
+    right:auto;
+
+    &.laxy-menu-right {
+        right:-($laxy-menu-width);
+        left:auto;
+    }
+
+    &.laxy-menu-active {
+        &.laxy-menu-left {
+            -webkit-transform: translate3d($laxy-menu-width, 0, 0);
+                -ms-transform: translate3d($laxy-menu-width, 0, 0);
+                    transform: translate3d($laxy-menu-width, 0, 0);
+        }
+
+        &.laxy-menu-right {
+            -webkit-transform: translate3d(-($laxy-menu-width), 0, 0);
+                -ms-transform: translate3d(-($laxy-menu-width), 0, 0);
+                    transform: translate3d(-($laxy-menu-width), 0, 0);
+        }
+    }
+}
+
+// ---------------------------------------------
+// Push Other Elements
+
+.laxy-wrapper {
+    .laxy-push {
+        -webkit-transition: $laxy-transition;
+                transition: $laxy-transition;
+    }
+
+    &.laxy-menu-active {
+
+        &.laxy-menu-left .laxy-push {
+            -webkit-transform: translate3d($laxy-menu-width, 0, 0);
+                -ms-transform: translate3d($laxy-menu-width, 0, 0);
+                    transform: translate3d($laxy-menu-width, 0, 0);
+
+            &.laxy-push-offset {
+                -webkit-transform: translate3d($laxy-menu-width - $laxy-offset, 0, 0);
+                    -ms-transform: translate3d($laxy-menu-width - $laxy-offset, 0, 0);
+                        transform: translate3d($laxy-menu-width - $laxy-offset, 0, 0);
+            }
+        }
+
+        &.laxy-menu-right .laxy-push {
+            -webkit-transform: translate3d(-($laxy-menu-width), 0, 0);
+                -ms-transform: translate3d(-($laxy-menu-width), 0, 0);
+                    transform: translate3d(-($laxy-menu-width), 0, 0);
+
+            &.laxy-push-offset {
+                -webkit-transition: $laxy-transition;
+                        transition: $laxy-transition;
+
+                -webkit-transform: translate3d($laxy-offset - $laxy-menu-width, 0, 0);
+                    -ms-transform: translate3d($laxy-offset - $laxy-menu-width, 0, 0);
+                        transform: translate3d($laxy-offset - $laxy-menu-width, 0, 0);
+            }
+        }
+    }
+}
+
+// ---------------------------------------------
+// Disable Content Scrolling
+
+.laxy-noscroll {
+    overflow:hidden;
+}
